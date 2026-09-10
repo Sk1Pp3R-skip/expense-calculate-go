@@ -4,22 +4,39 @@ import (
 	"fmt"
 )
 
+// Функция для получения правильного числа от пользователя
+func getAmount() float64 {
+
+	var amount float64
+	fmt.Print("Сколько вы потратили?")
+	fmt.Scan(&amount)
+	return amount
+}
+
+// Функция для расчёта среднего чека
+func calculateAverage(total float64, theNumberOfPurchases int) float64 {
+	if theNumberOfPurchases == 0 {
+		return 0
+	}
+
+	return total / float64(theNumberOfPurchases)
+}
+
 func main() {
 
 	var total float64
-	var amount float64
-	var theNumberOfPurchases = 0
-	var averageCheck float64 = 0
+	var theNumberOfPurchases int
 
 	fmt.Println("Калькулятор расходов (вводите числа, чтобы завершить работу введите - 0).")
 
 	for {
-		fmt.Print("Сколько вы потратили?")
-		fmt.Scan(&amount)
+
+		amount := getAmount()
 
 		if amount == 0 {
 
 			break
+
 		}
 
 		if amount < 0 {
@@ -40,8 +57,8 @@ func main() {
 
 	if theNumberOfPurchases > 0 {
 
-		averageCheck = total / float64(theNumberOfPurchases)
-		fmt.Printf("Ваш средний чек: %.2f.", averageCheck)
+		average := calculateAverage(total, theNumberOfPurchases)
+		fmt.Printf("Ваш средний чек: %.2f.", average)
 	} else {
 		fmt.Println("У вас не было трат.")
 	}
